@@ -24,7 +24,7 @@
 import { initializeApp } from 'firebase/app';
 import{
    getFirestore, collection, getDocs,
-   addDoc,onSnapshot,
+   addDoc,onSnapshot,doc,setDoc,
 }from 'firebase/firestore'
     
 import{
@@ -100,9 +100,13 @@ signupForm.addEventListener('submit', (e) =>{
 
     createUserWithEmailAndPassword(auth, email, password)
     .then((cred) => {
-     
-     
-     signupForm.reset();
+        const getDoc = getDoc(docRef)
+     const docRef =  doc(db,'users', cred.user.uid)
+       setDoc(docRef,{
+            bio : signupForm['signup-bio'].value
+        })
+    }).then(()=>{
+        signupForm.reset();
     })
 })   
 

@@ -1,5 +1,6 @@
 
 
+
 const guideList = document.querySelector('.guides')
 
 const  loggedOutLinks = document.querySelectorAll('.logged-out')
@@ -12,10 +13,17 @@ const setupUI = (user) =>{
     //togge ui
     if (user) {
         //account info
+       
+        
+       then(doc =>{
         const html =`
             <div> Logged in as ${user.email}</div>
+            <div> ${doc.data().bio}</div>
         `
         accountDetails.innerHTML = html
+        })
+
+       
         loggedInLinks.forEach(item => item.style.display= 'block');
     
         loggedOutLinks.forEach(item => item.style.display= 'none');
